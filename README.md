@@ -1,6 +1,6 @@
 # k8s-keda-demo
 
-### How to scale k8s deployments depending on custom prometheus metric using KEDA
+How to scale k8s deployments depending on custom prometheus metric using `KEDA`
 
 Alternative way is to use `prometheus-adapter` and `HPA` [demo-repo](https://github.com/yurymuski/k8s-hpa-demo)
 
