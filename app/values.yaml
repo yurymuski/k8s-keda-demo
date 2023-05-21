@@ -1,0 +1,5 @@
+# https://github.com/bitnami/charts/blob/main/bitnami/nginx/values.yaml
+metrics:
+  enabled: true
+  serviceMonitor: # adds metrics to existing kube-prometheus-stack's prometheus
+    enabled: true

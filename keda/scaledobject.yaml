@@ -1,0 +1,20 @@
+# https://keda.sh/docs/2.10/concepts/scaling-deployments/
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: keda-prometheus-test-app-nginx
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: test-app-nginx # NOTE: Must be in the same namespace as the ScaledObject
+  minReplicaCount:  1
+  maxReplicaCount:  20
+  triggers:
+  - type: prometheus
+    metadata:
+      serverAddress: http://kube-prometheus-stack-prometheus.default.svc.cluster.local:9090 # prometheus internal endpoint
+      metricName: nginx_http_requests_total
+      metricType: AverageValue
+      threshold: '5' # 5 req/sec
+      query: sum(rate(nginx_http_requests_total{service="test-app-nginx"}[1m]))

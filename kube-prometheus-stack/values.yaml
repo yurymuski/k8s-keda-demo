@@ -1,0 +1,43 @@
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+defaultRules:
+  create: true
+  rules:
+    alertmanager: false
+
+alertmanager:
+  enabled: false
+
+grafana:
+  enabled: true
+  adminPassword: prom-operator
+
+kubeProxy:
+  enabled: false
+
+
+prometheus:
+  enabled: true
+
+  prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+
+    retention: 7d
+    retentionSize: "2GB"
+
+    storageSpec:
+     volumeClaimTemplate:
+       spec:
+         resources:
+           requests:
+             storage: 4Gi
+
+    resources:
+      requests:
+        cpu: 200m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
