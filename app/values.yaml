@@ -3,3 +3,5 @@ metrics:
   enabled: true
   serviceMonitor: # adds metrics to existing kube-prometheus-stack's prometheus
     enabled: true
+
+terminationGracePeriodSeconds: 60 # NOTE: set the value your app need to finish active workflows
